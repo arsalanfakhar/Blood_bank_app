@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+         <header>
+             <div class="container">
+                <div class="col-sm-7">
+                    <h2 class="text-right text-uppercase logo-name">Blood bank</h2>
+                </div>
+                
+                    <img class="img-reponsive logo" src="img/blood-donation.png">
+                </div>
+             </div>
+         </header>
+
+         <section id="main_content" class="main_content">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-sm-8 content_details">
+                         <img class="img-reponsive" src="img/saylani_blood.jpg" width="80%">
+                         <h2>Saylani blood bank</h2>
+                         <p class="text-justify col-sm-8 ">The recently established, state of the art Saylani Blood Bank and Thalassemia Centre is furnished with modern equipment, well trained technicians, leading Hematologists, Pediatricians, and General Physicians, and offers free of cost supply of blood and blood components to the poor and the needy. Free and effective screening, counseling and continuous medical care is provided to the deserving patients with Thalassemia and other haemoglobinopathies.</p>
+                     </div>
+                     <div class="col-sm-4 forms">
+                         <!--Modal: Login / Register Form-->
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                    <!--Modal cascading tabs-->
+                                    <div class="modal-content-tabs">
+                            
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" id="navigation_tabs">
+                                        <li class="active">
+                                        <a data-toggle="tab" href="#login_panel"><i class="fas fa-user"></i>
+                                            Login</a>
+                                        </li>
+                                        <li>
+                                        <a data-toggle="tab" href="#register_panel"><i class="fas fa-user-plus"></i>
+                                            Register</a>
+                                        </li>
+                                    </ul>
+                            
+                                    <!-- Tab panels -->
+                                    <div class="tab-content">
+                                        <!--login_panel-->
+                                        <div class="tab-pane fade in active" id="login_panel">
+                            
+                                            <!--Body-->
+                                            <div class="modal-body ">
+                                                <div class="input-container">
+                                                <i class="fas fa-envelope icon "></i>
+                                                <input type="email" id="email_logpanel" class="form-control" placeholder="Your email">
+                                                </div>
+                                                
+                                                <div class="input-container">
+                                                <i class="fas fa-lock icon "></i>
+                                                <input type="password" id="pass_logpanel" class="form-control" placeholder="Your password">
+                                                </div>
+
+                                                <div class="text-center">
+                                                <button class="btn btn-info" onclick="checkLoginStatus()">Log in <i class="fas fa-sign-in-alt"></i></button>
+                                                </div>
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer">
+                                                <div class="text-center ">
+                                                <p>Not a member? <a href="Javascript:void(0)" class="blue-text" onclick="signup_btn_click();" >Sign Up</a></p>
+                                                <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+                                                </div>
+                                                
+                                            </div>
+                                        </div><!--/.login_panel-->
+                                        
+                            
+                                        <!--register_panel-->
+                                        <div class="tab-pane fade " id="register_panel">
+                            
+                                            <!--Body-->
+                                            <div class="modal-body ">
+                                                <div class="input-container">
+                                                    <i class="fas fa-envelope icon"></i>
+                                                    <input type="email" id="email_regpanel" class="form-control" placeholder="Your email">
+                                                </div>
+                                            
+                                                <div class="input-container">
+                                                    <i class="fas fa-lock icon"></i>
+                                                    <input type="password" id="pass_regpanel" class="form-control" placeholder="Your password">
+                                                </div>
+                                
+                                                <div class="input-container">
+                                                    <i class="fas fa-lock icon"></i>
+                                                    <input type="password" id="reppass_regpanel" class="form-control" placeholder="Repeat password">
+                                                </div>
+                                
+                                                <div class="text-center">
+                                                <button class="btn btn-info" onclick="registerUser()">Sign up <i class="fas fa-user-plus"></i></button>
+                                                </div>
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer">
+                                                <div class="text-center">
+                                                <p>Already have an account? <a href="Javascript:void(0)" class="blue-text" onclick="login_btn_click()">Log In</a></p>
+                                                </div>
+                                                
+                                            </div>
+                                        </div><!--/.register_panel-->
+                                        
+                                    </div><!--tab-content-->
+                            
+                                    </div><!--modal-tabs-->
+                                </div><!--model-content-->
+                                <!--/.Content-->
+                     </div><!--forms-->
+                 </div><!--row-->
+             </div><!--container-->
+         </section><!--main-content-->
+         
+         <footer class="footer">
+             <p class="text-center">All Rights Reserved &copy; 2019</p>
+         </footer>
+         
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+        
+    </body>
+</html>
