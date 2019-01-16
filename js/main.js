@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 
 
 
-//Index_page_js_start
+//Login_page_js_start
 function signup_btn_click(){
     var a=document.getElementById('navigation_tabs');
     var b=a.getElementsByTagName('li');
@@ -43,6 +43,7 @@ const auth=firebase.auth();
 var email_logpanel;var pass_logpanel;
 var email_regpanel;var pass_regpanel;var reppass_regpanel;
 
+
 function getValue_loginpanel(){
     email_logpanel=document.getElementById('email_logpanel').value;
     pass_logpanel=document.getElementById('pass_logpanel').value;
@@ -55,25 +56,50 @@ function getValue_regpanel(){
 }
         
 function checkLoginStatus(){
+    var status;
+    var modal = document.getElementById("myModal");
+    check=1;
     getValue_loginpanel();
     firebase.auth().signInWithEmailAndPassword(email_logpanel, pass_logpanel)
-    //.then(res=>{
-    //    alert("Sucess");
-   // })
+    .then(res=>{
+      //  alert("Sucess");
+    modal.style.display="block";
+    status="now you are logged in";
+    document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
+    
+    })
     .catch(function(error) {
         // Handle Errors here.
         var errorMessage = error.message;
-        alert(errorMessage);
-    });
-}
 
+        modal.style.display="block";
+        
+        document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
+
+      //  alert(errorMessage);
+    });
+    
+}
+var check=0;
 function registerUser(){
+    check=2;
+    var status;
+    var modal = document.getElementById("myModal");
     getValue_regpanel();
     auth.createUserWithEmailAndPassword(email_regpanel, pass_regpanel)
+    .then(res=>{
+    
+      modal.style.display="block";
+      status="Registered Succefully and Logged in..";
+      document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
+      
+      })
     .catch(function(error) {
         // Handle Errors here
         var errorMessage = error.message;
-        alert(errorMessage);
+        modal.style.display="block";
+        
+        document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
         // ...
     });
 }
@@ -91,5 +117,43 @@ auth.onAuthStateChanged(firebaseUser=>{
     }
 
 })
-//Index_page_js_end
+function logout(){
 
+    auth.signOut();
+    document.getElementById("myModal").style.display="none";
+    if(check==1){
+  document.getElementById('email_logpanel').value="";
+    document.getElementById('pass_logpanel').value="";
+    
+  var a=document.getElementById('navigation_tabs');
+  var b=a.getElementsByTagName('li');
+  //For first li
+  b[0].className="active";
+  b[0].getElementsByTagName('a')[0].setAttribute("aria-expanded",true);
+  document.getElementsByClassName('tab-pane')[0].className="tab-pane fade in active"
+  //For second li
+  b[1].className="";
+  b[1].getElementsByTagName('a')[0].setAttribute("aria-expanded",false);
+  document.getElementsByClassName('tab-pane')[1].className="tab-pane fade";
+    }
+    else if(check==2){
+        document.getElementById('email_regpanel').value="";
+        document.getElementById('pass_regpanel').value="";
+        document.getElementById('reppass_regpanel').value="";
+        var a=document.getElementById('navigation_tabs');
+        var b=a.getElementsByTagName('li');
+        //For first li
+        b[0].className="";
+        b[0].getElementsByTagName('a')[0].setAttribute("aria-expanded",false);
+        document.getElementsByClassName('tab-pane')[0].className="tab-pane fade"
+        //For second li
+        b[1].className="active";
+        b[1].getElementsByTagName('a')[0].setAttribute("aria-expanded",true);
+        document.getElementsByClassName('tab-pane')[1].className="tab-pane fade in active";
+
+
+    }
+
+}
+
+//Login_page_js_end
