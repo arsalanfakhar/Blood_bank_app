@@ -55,12 +55,20 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+    /*Index_page-css_start*/
     header{
         background-color: aliceblue;
     }
     .logo{
         margin-top: 11px
+    }
+    .logo_div{
+        margin: 0 auto;
+        text-align: center;
+
+    }
+    .logo_name{
+        font-size: 28px;
     }
     .input-container {
         display: -ms-flexbox; /* IE10 */
@@ -87,8 +95,10 @@ textarea {
       section#main_content{
         padding-top: 54px;
       }
-
-
+    /*Index_page-css_end*/
+    #blood_grp{
+        width: 20%;
+    }
 
 
 

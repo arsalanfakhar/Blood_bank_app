@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 
 
 
-
+//Index_page_js_start
 function signup_btn_click(){
     var a=document.getElementById('navigation_tabs');
     var b=a.getElementsByTagName('li');
@@ -91,5 +91,5 @@ auth.onAuthStateChanged(firebaseUser=>{
     }
 
 })
-
+//Index_page_js_end
 
