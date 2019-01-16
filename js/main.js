@@ -54,27 +54,60 @@ function getValue_regpanel(){
     pass_regpanel=document.getElementById('pass_regpanel').value;
     reppass_regpanel=document.getElementById('reppass_regpanel').value;
 }
-        
+
 function checkLoginStatus(){
     var status;
     var modal = document.getElementById("myModal");
     check=1;
     getValue_loginpanel();
+  
     firebase.auth().signInWithEmailAndPassword(email_logpanel, pass_logpanel)
+
     .then(res=>{
+       swal({
+            title: "Congratulations",
+            text: "You are Succefully logged in..!",
+        
+            icon: "success",
+        
+       
+          })
+          .then((data) => {
+            if (data) {
+                
+              location="main_page.html";
+          }
+        }); 
+
+
+
       //  alert("Sucess");
-    modal.style.display="block";
-    status="now you are logged in";
-    document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
+    // modal.style.display="block";
+    // status="now you are logged in";
+    // document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
     
     })
     .catch(function(error) {
         // Handle Errors here.
         var errorMessage = error.message;
 
-        modal.style.display="block";
+        swal({
+            title: "Signed In Failed",
+            text: "Your email or password did not matched..!",
+         
+            icon: "error",
+            
+          })
+          .then((data) => {
+            if (data) {
+                
+              location="index.html";
+          }
+        }); 
+
+      //  modal.style.display="block";
         
-        document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
+      //  document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
 
       //  alert(errorMessage);
     });
@@ -86,22 +119,73 @@ function registerUser(){
     var status;
     var modal = document.getElementById("myModal");
     getValue_regpanel();
+    if(pass_regpanel!=reppass_regpanel){
+
+
+        
+        swal({
+            title: "Password Mismatch",
+            text: "Your Passwords did not match!",
+            type: "error",
+            icon: "error",
+          })
+          .then((data) => {
+            if (data) {
+                
+              location="index.html";
+          }
+        }); 
+
+
+
+    }
+   else {
     auth.createUserWithEmailAndPassword(email_regpanel, pass_regpanel)
+ 
     .then(res=>{
+        swal({
+            title: "Congratulations",
+            text: "You are Succefully logged in..!",
+        
+            icon: "success",
+        
+       
+          })
+          .then((data) => {
+            if (data) {
+                
+              location="main_page.html";
+          }
+        }); 
+        
     
-      modal.style.display="block";
-      status="Registered Succefully and Logged in..";
-      document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
+    //   modal.style.display="block";
+    //   status="Registered Succefully and Logged in..";
+    //   document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
       
       })
     .catch(function(error) {
+
+
+        swal({
+            title: "Registeration Failed",
+            text: "Your Email/password is already registered or badly format!",
+            type: "error",
+            icon: "error",
+          })
+          .then((data) => {
+            if (data) {
+                
+              location="index.html";
+          }
+        }); 
         // Handle Errors here
-        var errorMessage = error.message;
-        modal.style.display="block";
+      //  var errorMessage = error.message;
+      //  modal.style.display="block";
         
-        document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
+     //   document.getElementById("model-body").innerHTML='<h1>'+errorMessage+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" TryAgain! "+'</button>';
         // ...
-    });
+    });}
 }
 var user;
 //Adding a authentication listener
