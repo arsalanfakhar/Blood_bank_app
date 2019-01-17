@@ -14,18 +14,35 @@
         <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
         <script src="js/main.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <!--Myscript-->
     </head>
     <body>
          <header>
-             <div class="container logo_div">
-                <span class="text-uppercase logo_name">Blood bank</span>
-                <img class="img-reponsive logo" src="img/blood-donation.png">
+             <div class="container ">
+                <div class="logo_div">
+                        <span class="text-uppercase logo_name">Blood bank</span>
+                        <img class="img-reponsive logo" src="img/blood-donation.png">
+                </div>
+                <div class="text-right" style="display: inline;">
+                        <!--<button class="btn btn-info">Log out <i class="fas fa-sign-out-alt"></i></button>-->
+                        <div class="dropdown">
+                                <img id="user_image" src="img/user.png">
+                                <span id="display_username" onclick="">Userx</span>
+                                <a href="Javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-caret-down"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="Javascript:void(0)" id="btn_logout" onclick="logout_user()">Logout</a></li>
+                                </ul>
+                        </div>
+                        
+
+                </div>
              </div>
+             
          </header>
-         <section>
+         <section id="mid_section" class="mid_section">
              <div class="container">
                     <div id="Donor_registration_div" class=" text-right">
-                            <button class="btn btn-default">Register as a Donor</button>
+                            <button class="btn btn-success" id="btn_reg_donor" onclick="regDonor()">Register as a Donor</button>
                     </div>
                     <div class="text-left">
                                 <div class="form-group">
@@ -48,7 +65,14 @@
                     
              </div>
          </section>
-         
+         <section id="data_section" class="data_section">
+            <table class="table-responsive">
+
+            </table>
+
+
+
+         </section>
 
          <footer class="footer">
              <p class="text-center">All Rights Reserved &copy; 2019</p>

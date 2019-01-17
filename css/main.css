@@ -89,20 +89,28 @@ textarea {
           background-color: rgba(151, 141, 154, 0.9);
           border-top: 3px solid black;
           border-top-right-radius: 20px;
-          border-top-left-radius: 20px;
-          
+          border-top-left-radius: 20px; 
       }
       section#main_content{
         padding-top: 54px;
       }
     /*Index_page-css_end*/
+
+    /*Main page-css start*/
     #blood_grp{
         width: 20%;
     }
+    #mid_section{
+        padding-top: 28px;
+    }
+    /*Main page-css end*/
+    /*Donor_page_css*/
 
-
-
-
+    .center_form{
+        float: none;
+             
+    }
+    /*Donor_page_css_end
 
 
 /* ==========================================================================

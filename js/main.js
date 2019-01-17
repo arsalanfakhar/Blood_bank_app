@@ -53,6 +53,7 @@ function getValue_regpanel(){
     email_regpanel=document.getElementById('email_regpanel').value;
     pass_regpanel=document.getElementById('pass_regpanel').value;
     reppass_regpanel=document.getElementById('reppass_regpanel').value;
+    username_regpanel=document.getElementById('username').value;
 }
 
 function checkLoginStatus(){
@@ -67,25 +68,18 @@ function checkLoginStatus(){
        swal({
             title: "Congratulations",
             text: "You are Succefully logged in..!",
-        
             icon: "success",
-        
-       
           })
           .then((data) => {
             if (data) {
-                
-              location="main_page.html";
+            //replace location here
+            location.replace("main_page.html");
           }
         }); 
-
-
-
       //  alert("Sucess");
     // modal.style.display="block";
     // status="now you are logged in";
     // document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
-    
     })
     .catch(function(error) {
         // Handle Errors here.
@@ -93,17 +87,10 @@ function checkLoginStatus(){
 
         swal({
             title: "Signed In Failed",
-            text: "Your email or password did not matched..!",
-         
+            text: error.message,
             icon: "error",
             
-          })
-          .then((data) => {
-            if (data) {
-                
-              location="index.html";
-          }
-        }); 
+          }) 
 
       //  modal.style.display="block";
         
@@ -119,46 +106,33 @@ function registerUser(){
     var status;
     var modal = document.getElementById("myModal");
     getValue_regpanel();
-    if(pass_regpanel!=reppass_regpanel){
-
-
-        
+    if(pass_regpanel!=reppass_regpanel){       
         swal({
             title: "Password Mismatch",
             text: "Your Passwords did not match!",
             type: "error",
             icon: "error",
           })
-          .then((data) => {
-            if (data) {
-                
-              location="index.html";
-          }
-        }); 
-
-
-
     }
    else {
     auth.createUserWithEmailAndPassword(email_regpanel, pass_regpanel)
- 
     .then(res=>{
+        auth.currentUser.updateProfile({
+            displayName: username_regpanel
+        })
         swal({
             title: "Congratulations",
-            text: "You are Succefully logged in..!",
-        
+            text: "You are Automatically logged in..!",
             icon: "success",
         
        
           })
           .then((data) => {
             if (data) {
-                
-              location="main_page.html";
+            //replace location here
+              location.replace("main_page.html");
           }
         }); 
-        
-    
     //   modal.style.display="block";
     //   status="Registered Succefully and Logged in..";
     //   document.getElementById("model-body").innerHTML='<h1>'+status+'</h1>'+'<br>'+ "<button class='btn btn-info btn-md glyphicon glyphicon-log-out' onclick='logout()'> "+" Logout "+'</button>';
@@ -166,19 +140,12 @@ function registerUser(){
       })
     .catch(function(error) {
 
-
         swal({
             title: "Registeration Failed",
-            text: "Your Email/password is already registered or badly format!",
+            text: error.message,
             type: "error",
             icon: "error",
-          })
-          .then((data) => {
-            if (data) {
-                
-              location="index.html";
-          }
-        }); 
+          }) 
         // Handle Errors here
       //  var errorMessage = error.message;
       //  modal.style.display="block";
@@ -188,12 +155,20 @@ function registerUser(){
     });}
 }
 var user;
+
 //Adding a authentication listener
 auth.onAuthStateChanged(firebaseUser=>{
     if(firebaseUser){
         user=firebaseUser;
         console.log(firebaseUser.email);
-        
+        //Check for main_page
+        //when hosting set it to location.pathname
+        if(location.href=="file:///F:/Blood%20bank%20site/main_page.html")
+        {
+            setDisplayName();
+        }
+
+
     }
     else{
         console.log('not logged in');
@@ -201,7 +176,7 @@ auth.onAuthStateChanged(firebaseUser=>{
     }
 
 })
-function logout(){
+/* function logout(){
 
     auth.signOut();
     document.getElementById("myModal").style.display="none";
@@ -238,6 +213,40 @@ function logout(){
 
     }
 
-}
+} */
 
 //Login_page_js_end
+
+//Main_page_js_start
+
+function logout_user(){
+    auth.signOut();
+    location.replace("./index.html")
+}
+
+
+
+function setDisplayName(){
+    if(user==null){
+        setInterval(setDisplayName(),1000);
+    }
+    else{
+        if(user.displayName=="" ||user.displayName==null ){
+            document.getElementById('display_username').innerHTML="Username";
+            }
+            else{
+            document.getElementById('display_username').innerHTML=user.displayName;
+            }
+    }
+    
+} 
+
+//Main_page_js_end
+
+//Donor_page_js_start
+function regDonor(){
+    location.assign("donor_reg_form.html")
+}
+
+
+//Donor_page_js_end
