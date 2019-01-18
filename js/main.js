@@ -25,6 +25,7 @@ function signup_btn_click(){
     b[1].getElementsByTagName('a')[0].setAttribute("aria-expanded",true);
     document.getElementsByClassName('tab-pane')[1].className="tab-pane fade in active";
 }
+
 function login_btn_click(){
     var a=document.getElementById('navigation_tabs');
     var b=a.getElementsByTagName('li');
@@ -74,6 +75,8 @@ function checkLoginStatus(){
             if (data) {
             //replace location here
             location.replace("main_page.html");
+            retrieve();
+          
           }
         }); 
       //  alert("Sucess");
@@ -131,6 +134,8 @@ function registerUser(){
             if (data) {
             //replace location here
               location.replace("main_page.html");
+              retrieve();
+            
           }
         }); 
     //   modal.style.display="block";
@@ -160,6 +165,7 @@ var user;
 auth.onAuthStateChanged(firebaseUser=>{
     if(firebaseUser){
         user=firebaseUser;
+     
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
@@ -244,9 +250,206 @@ function setDisplayName(){
 //Main_page_js_end
 
 //Donor_page_js_start
+function showage(){ 
+  
+ 
+var today=new Date();
+
+var c_year=today.getFullYear();
+
+var str=document.getElementById("dateofb").value;
+var arr=str.split("-");
+
+
+
+var Age=c_year-arr[0];
+
+document.getElementById("age").value=Age;
+
+
+}
 function regDonor(){
-    location.assign("donor_reg_form.html")
+    location.assign("donor_reg_form.html");
+}
+var firebaseRef=firebase.database().ref();
+//retrieve();
+var counts;
+firebaseRef.child("Records").on('value', function(snapshot) { counts= snapshot.numChildren(); });
+//var num=firebaseRef.child("Records").datasnapshot.getChildrenCount();
+var checking=0;
+function submit (){
+
+var  email=document.getElementById("email_donor").value;
+
+
+
+
+
+var isregistered=()=>
+{
+    this.checking=0;
+    //var t=1;
+    
+    firebaseRef.child("Records").once('value', function(snapshot){
+if(snapshot.exists()){
+    var content = '';
+
+    snapshot.forEach(function(data){
+        var val = data.val();
+       // alert(email);
+       // alert(val.Email);
+     if(val.Email===email){
+       //  alert("in email matching if");
+       
+    this.checking=1;
+    }
+    });
+   
+
 }
 
+});
+
+
+
+
+}
+
+isregistered();
+
+
+
+
+if(checking){
+alert("Already Registered");
+}
+else{
+var firstName=document.getElementById("firstname").value;
+var lastName=document.getElementById("lastname").value;
+var dateOfBirth=document.getElementById("dateofb").value;
+
+var address=document.getElementById("address").value;
+var age=document.getElementById("age").value;
+var phone_number=document.getElementById("phone_number").value;
+var bloodGroup=document.getElementById("selectpicker").value;
+if(firstName==""||lastName==""||dateOfBirth==""||address==""||age==""||phone_number==""||bloodGroup=="")
+{
+alert("some fields are empty!");
+}
+else{
+firebaseRef.child("Records//"+(++counts)).set({name:firstName+lastName,DateOfbirth:dateOfBirth,Email:email,Address:address,Age:age,Phone_Number:phone_number,Blood_Group:bloodGroup});
+//firebaseRef.child("Records").set({name:firstName+lastName,DateOfbirth:"dateOfBirth",Email:"email"});
+alert("Registered");
+location.replace("main_page.html");
+
+/*swal({
+    title: "Congratulations",
+    text: "You are Registered.!",
+    icon: "success",
+
+
+  })
+  .then((data) => {
+    if (data) {
+    
+      location.replace("main_page.html");
+  }
+}); */
+
+
+}
+}
+}/*
+()=>{
+    if(document.getElementById("blood_grp").value=="Default"){var n="default";retrieve("Default");}
+}
+function whenchanging(){
+alert("i m here");
+    var a=document.getElementById("blood_grp").value;
+   retrieve(a);
+}
+*/
+
+function retrieve()
+{ 
+    var a=document.getElementById("blood_grp").value;//a  is taking for searching a/c to blood group
+    var t=1;
+  
+    firebaseRef.child("Records").once('value', function(snapshot){
+if(snapshot.exists()){
+    var s='<tr style="border:1px solid black" id="tr" >'+
+          '<th style="border:1px solid black ">#</th>'+
+          '<th style="border:1px solid black ">Names</th>'+
+          '<th style="border:1px solid black">Blood Group</th>' +
+          '<th style="border:1px solid black">Age</th>' +
+          '<th style="border:1px solid black">Phone Number</th>'+
+          '<th style="border:1px solid black">Address</th>' +
+          '<th style="border:1px solid black">Email</th>'
+    var content = '';
+    
+
+    snapshot.forEach(function(data){
+        
+        var val = data.val();
+      if(a=="Default"){
+        
+        
+        content +='<tr style="border:1px solid black">';
+        content+='<td style="border:1px solid black">'+t+'</td>';
+        content += '<td style="border:1px solid black">' + val.name + '</td>';
+        
+        content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
+        content += '<td style="border:1px solid black">' + val.Age+ '</td>';
+        content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
+        content += '<td style="border:1px solid black">' + val.Address+ '</td>';
+        content += '<td style="border:1px solid black">' + val.Email+ '</td>';
+
+     
+        
+        content += '</tr>';
+        t++;}
+     else if(a==val.Blood_Group){
+         
+              
+                
+                content +='<tr style="border:1px solid black">';
+                content+='<td style="border:1px solid black">'+t+'</td>';
+                content += '<td style="border:1px solid black">' + val.name + '</td>';
+                
+                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
+                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
+                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
+                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
+                content += '<td style="border:1px solid black">' + val.Email+ '</td>';
+
+                content += '</tr>';
+                t++;
+
+      }
+
+
+        
+     
+    });
+    //$('#ex-table').append(content);
+  
+   
+   if(content!="")
+    document.getElementById("ex-table").innerHTML=s+content;
+ else{
+    document.getElementById("ex-table").innerHTML=s+"<h1>No Record<h1>";
+ }
+    
+     
+
+}
+
+
+});
+
+
+
+
+}
 
 //Donor_page_js_end
