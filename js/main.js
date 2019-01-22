@@ -1,4 +1,5 @@
 // Initialize Firebase
+
 var config = {
     apiKey: "AIzaSyB01U3GudvrOaiDl1HOOmyeyWh7XQnrDFY",
     authDomain: "blood-bank-app-716da.firebaseapp.com",
@@ -161,28 +162,33 @@ function registerUser(){
 }
 var user;
 
+
 //Adding a authentication listener
 auth.onAuthStateChanged(firebaseUser=>{
     
     if(firebaseUser){
-        user=firebaseUser;
+      this.user=firebaseUser;
      
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
-         if(location.href=="file:///F:/Blood%20bank%20site/main_page.html")
+         if(document.URL==("file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/main_page.html"))
          {
+            
              setDisplayName();
          }
 
 
     }
     else{
+      
+      
         console.log('not logged in');
         
     }
 
 })
+
 /* function logout(){
 
     auth.signOut();
@@ -238,14 +244,8 @@ function setDisplayName(){
     
     
     
-        if(user.displayName=="" ||user.displayName==null ){
-            
-            document.getElementById('display_username').innerHTML="Username";
-            }
-            else{
-            document.getElementById('display_username').innerHTML=user.displayName;
-            }
-    
+     var temp=(user.email).split('@');
+     document.getElementById('display_username').innerHTML= '<span id="display_username" >'+temp[0]+'</span>';
     
         
     
@@ -263,7 +263,76 @@ database.ref().on('value',function(snapshot){
 })
 
 function regDonor(){
+   // console.log(key1);
+    window.location.href="donor_reg_form.html";
+ 
+    
+  
 
+}
+
+var fun= function(){
+    database.ref('Records').once('value',function(snapshot){
+       
+         
+        if(snapshot.exists()){
+         
+            if(snapshot.hasChild(user.uid)){
+            var data=snapshot.val();
+           
+            document.getElementById("form_reg").innerHTML=' <form id="form_reg">'+
+                    '<input type="radio"  name="gender" id="yourself" value="Yourself" onclick="userregistered();"  > Yourself'+
+                    '<input type="radio" name="gender" id="others" value="Others"  checked  > Others from your reference'+
+                   
+                  '</form>';
+                  document.getElementById("ref").value=user.email;
+                  document.getElementById('email_donor').value='-';
+
+
+            }
+            else{
+
+                document.getElementById("ref").value="self";
+                document.getElementById('email_donor').value=user.email;
+
+            }
+    
+           // })
+            
+        }
+        else{
+
+            document.getElementById("ref").value="self";
+            document.getElementById('email_donor').value=user.email;
+
+        }
+        })
+        
+    }
+function getdata(){
+fun();
+}
+function userregistered(){
+   
+if(user.uid){
+    swal({
+        title: "Error",
+        text: "You already registered!",
+        icon: "error",
+      })
+      .then(res=>{
+        location.replace("donor_reg_form.html");
+      })
+document.getElementById('others').checked=true;
+
+}
+
+}
+
+
+/*
+function regDonor(){
+alert("reg");
     database.ref('Records/'+user.uid).once('value',function(snapshot){
         
         if(snapshot.exists()){
@@ -286,7 +355,7 @@ function regDonor(){
 
     })
    // location.assign("trial_donor.html");
-}
+}*/
 /*Changes end */
 
 
@@ -295,8 +364,9 @@ function regDonor(){
 
 //Donor_page_js_start
 
+
 var firstName;var lastName;var dateob;var email_donors;var address_donor;
-var address_donor;var age_donor;var phone_donor;var blood_grp;
+var address_donor;var age_donor;var phone_donor;var blood_grp;var reference;
 
 function getValues(){
     
@@ -309,18 +379,56 @@ function getValues(){
      age_donor=document.getElementById("age").value;
      phone_donor=document.getElementById("phone_number").value;
      blood_grp=document.getElementById("selectpicker").value;
+     reference=document.getElementById("ref").value;
 }
 
 function submitData(){
     getValues();
-    database.ref('Records/'+user.uid).set({
+   
+    if(firstName!=""&&lastName!=""&&dateob!=""&&email_donors!=""&&address_donor!=""&& phone_donor!="")
+    
+    {
+      var userid;
+     
+      if(document.getElementById('yourself').checked==true)
+      userid=user.uid;
+      else{
+      userid=user.email;
+      var temp=userid.split(".");
+      userid=temp[0];
+      }
+      var check=0;
+      database.ref('Records').once('value',function(snapshot){
+       
+         
+        if(snapshot.exists()){
+            snapshot.forEach(function(data){
+                var val=data.val();
+                if(val.Phone_Number==phone_donor){
+                    check=1;
+                }
+
+
+
+            })
+         
+        }
+        })
+
+
+
+
+
+if(check==0)
+    database.ref('Records/'+userid).set({
         name:firstName+" "+lastName,
         DateOfbirth:dateob,
         email:email_donors,
         Address:address_donor,
         Age:age_donor,
         Phone_Number:phone_donor,
-        Blood_Group:blood_grp
+        Blood_Group:blood_grp,
+        Reference:reference
 
     })
     .then(()=>{
@@ -333,6 +441,28 @@ function submitData(){
             location.replace("main_page.html");
           })
     })
+
+    else{
+        swal({
+            title: "Error",
+            text: "You already registered",
+            icon: "error",
+          })
+          .then(res=>{
+            location.replace("donor_reg_form.html");
+          })
+        
+    }
+}
+else{
+    swal({
+        title: "Empty",
+        text: "Some fields are empty!",
+        icon: "error",
+      })
+
+
+}
 }
 
 
@@ -343,9 +473,9 @@ function submitData(){
 
 
 
-/* function showage(){ 
+ function showage(){ 
   
- 
+
 var today=new Date();
 
 var c_year=today.getFullYear();
@@ -358,9 +488,10 @@ var arr=str.split("-");
 var Age=c_year-arr[0];
 
 document.getElementById("age").value=Age;
+console.log(numRefer);
 
 
-} */
+} 
 // function regDonor(){
 //     location.assign("donor_reg_form.html");
 // }
@@ -479,7 +610,8 @@ function retrieve()
         '<th style="border:1px solid black">Age</th>' +
         '<th style="border:1px solid black">Phone Number</th>'+
         '<th style="border:1px solid black">Address</th>' +
-        '<th style="border:1px solid black">Email</th>'
+        '<th style="border:1px solid black">Email</th>'+
+        '<th style="border:1px solid black">Reference</th>'
          var content = '';
 
     if(snapshot.exists()){
@@ -501,7 +633,7 @@ function retrieve()
         content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
         content += '<td style="border:1px solid black">' + val.Address+ '</td>';
         content += '<td style="border:1px solid black">' + val.email+ '</td>';
-
+        content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
      
         
         content += '</tr>';
@@ -518,8 +650,8 @@ function retrieve()
                 content += '<td style="border:1px solid black">' + val.Age+ '</td>';
                 content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
                 content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Email+ '</td>';
-
+                content += '<td style="border:1px solid black">' + val.email+ '</td>';
+                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
                 content += '</tr>';
                 t++;
 
@@ -541,7 +673,7 @@ function retrieve()
 }
 else{
     s+='</tr>';
-    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="7">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</tr>';
+    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="7">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</td>' +'</tr>';
 }
 
 
