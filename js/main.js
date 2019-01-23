@@ -170,7 +170,7 @@ auth.onAuthStateChanged(firebaseUser=>{
     
     if(firebaseUser){
 
-        if(location.href=="file:///F:/Blood%20bank%20site/index.html" && tellstatus==false){
+        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html" && tellstatus==false){
             swal({
                 title: "Redirecting",
                 text: "Taking to new page",
@@ -188,10 +188,13 @@ auth.onAuthStateChanged(firebaseUser=>{
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
-         if(document.URL==("file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/main_page.html"))
+         if(document.URL==("file:///D:/b%20bank/Blood_bank_app/main_page.html"))
          {
             
              setDisplayName();
+         }
+         if(location.href=="file:///D:/b%20bank/Blood_bank_app/donor_reg_form.html"){
+            setEmail();
          }
 
 
@@ -200,7 +203,7 @@ auth.onAuthStateChanged(firebaseUser=>{
       
       
         console.log('not logged in');
-        if(location.href=="file:///F:/Blood%20bank%20site/index.html"){
+        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html"){
             //if response is earlier then also stop user
             setTimeout(function(){
                 document.getElementsByClassName('overlay')[0].style.display="none";
@@ -284,23 +287,42 @@ database.ref().on('value',function(snapshot){
 
 })
 
-function regDonor(){
-   // console.log(key1);
-    window.location.href="donor_reg_form.html";
- 
+
+
+var setEmail= function(){
     
-  
+    var refvalue=document.getElementById('ref').value;
+    
+    if(refvalue=="Not Referred"){
+        //document.getElementById('email_donor').readOnly=true;
+        //do work
+        document.getElementById('email_donor').readOnly=true;
+        document.getElementById('email_donor').value=user.email;
+        /* database.ref('Records').once('value',function(snapshot){
+            if(snapshot.exists()){
+                
+                if(snapshot.hasChild(user.uid)){
+                    
+                
+            }
+            
+            }
 
-}
+        }) */
 
-var fun= function(){
-    database.ref('Records').once('value',function(snapshot){
+    }
+    else{
+        
+        document.getElementById('email_donor').value="";
+        document.getElementById('email_donor').readOnly=false;
+    }
+    /* database.ref('Records').once('value',function(snapshot){
        
          
         if(snapshot.exists()){
          
             if(snapshot.hasChild(user.uid)){
-            var data=snapshot.val();
+            /* var data=snapshot.val();
            
             document.getElementById("form_reg").innerHTML=' <form id="form_reg">'+
                     '<input type="radio"  name="gender" id="yourself" value="Yourself" onclick="userregistered();"  > Yourself'+
@@ -317,24 +339,28 @@ var fun= function(){
                 document.getElementById("ref").value="self";
                 document.getElementById('email_donor').value=user.email;
 
-            }
+            } */
     
            // })
             
-        }
+       /* }
         else{
 
-            document.getElementById("ref").value="self";
+            /* document.getElementById("ref").value="self";
             document.getElementById('email_donor').value=user.email;
-
+ */
+/*
         }
-        })
+        }
+    }) */
         
     }
 function getdata(){
-fun();
+
+checkref();
+
 }
-function userregistered(){
+/* function userregistered(){
    
 if(user.uid){
     swal({
@@ -349,7 +375,7 @@ document.getElementById('others').checked=true;
 
 }
 
-}
+} */
 
 
 /*
@@ -406,7 +432,7 @@ function getValues(){
 
 function submitData(){
 
-    var x=user.id;
+    
 
 
     getValues();
@@ -414,7 +440,63 @@ function submitData(){
     if(firstName!=""&&lastName!=""&&dateob!=""&&email_donors!=""&&address_donor!=""&& phone_donor!="")
     
     {
-      var userid;
+        var userid;
+        if(document.getElementById('ref').value=="Reffered"){
+            userid=user.email;
+            var temp=userid.split(".");
+            userid=temp[0];
+            
+            database.ref('Records/').push({
+                name:firstName+" "+lastName,
+                DateOfbirth:dateob,
+                email:email_donors,
+                Address:address_donor,
+                Age:age_donor,
+                Phone_Number:phone_donor,
+                Blood_Group:blood_grp,
+                Reference:user.email,
+    
+        
+            })
+            .then(()=>{
+                swal({
+                    title: "Congratulations",
+                    text: "You Saved a life!",
+                    icon: "success",
+                  })
+                  .then(res=>{
+                    location.replace("main_page.html");
+                  })
+            })
+        }
+        else{
+            userid=user.uid;
+            database.ref('Records/'+userid).set({
+                name:firstName+" "+lastName,
+                DateOfbirth:dateob,
+                email:email_donors,
+                Address:address_donor,
+                Age:age_donor,
+                Phone_Number:phone_donor,
+                Blood_Group:blood_grp,
+                Reference:"Self",
+    
+        
+            })
+            .then(()=>{
+                swal({
+                    title: "Congratulations",
+                    text: "You Saved a life!",
+                    icon: "success",
+                  })
+                  .then(res=>{
+                    location.replace("main_page.html");
+                  })
+            })
+        } 
+
+            
+      /* var userid;
      
       if(document.getElementById('yourself').checked==true)
       userid=user.uid;
@@ -478,7 +560,7 @@ if(check==0)
             location.replace("donor_reg_form.html");
           })
         
-    }
+    } */
 }
 else{
     swal({
@@ -512,19 +594,37 @@ var arr=str.split("-");
 
 
 var Age=c_year-arr[0];
-
-document.getElementById("age").value=Age;
-console.log(numRefer);
+if(Age>6){
+document.getElementById("age").value=Age;}
+else{
+    swal({
+        title: "Error",
+        text: "You must be 7 years old",
+        icon: "error",
+      })
+      .then(res=>{
+       document.getElementById('dateofb').value="";
+      })
+}
+//console.log(numRefer);
 
 
 } 
+
 function checkref(){
+    
     var selection=localStorage.getItem("User_ref_selection");
+    
     if(selection=="Yes"){
-        document.getElementById('user_ref').innerHTML="Referred";
+        document.getElementById('ref').options[0].innerText="Reffered";
+        document.getElementById('ref').readOnly=true;
     }
     else{
-        document.getElementById('user_ref').innerHTML="Not Referred";
+        //readonly true kar
+        var ref=document.getElementById('ref');
+        var opt='<option>Reffered</option>';
+        ref.innerHTML+=opt;
+        ref.readOnly=false;
     }
 }
 
@@ -557,6 +657,8 @@ function checkref(){
 
         }
         else{
+            //ask for himself or another person
+
             localStorage.setItem("User_ref_selection", "No");
             location.assign("donor_reg_form.html");
         }

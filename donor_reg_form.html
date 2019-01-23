@@ -31,7 +31,7 @@
                                                 <input type="radio" name="gender" id="others" value="Others" > Others from your reference
                                                
                                               </form> -->
-                                        <span id="user_ref" onclick="checkref()">ccc</span>
+                                    
                                        
                                 
         
@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                     <label for="email_donor" id="email_id">Email Address</label>
-                                    <input type="email" class="form-control" placeholder="Enter email address" id="email_donor" required readonly> 
+                                    <input type="email" class="form-control" placeholder="Enter email address" id="email_donor" required > 
                             </div>
                             <div class="form-group">
                                     <label for="address">Full Address:</label>
@@ -90,8 +90,15 @@
                              </div>
                              <div class="form-group">
                                 <label for="reference">Reference</label>
+                                <select class="form-control" id="ref" onchange="setEmail()" required >
+                                  <option>Not Referred</option>
+                                  
+                                </select>
+                            </div>
+                             <!-- <div class="form-group">
+                                <label for="reference">Reference</label>
                                 <input type="text" class="form-control" placeholder="" id="ref" required readonly > 
-                        </div>
+                             </div> -->
                             
                     </form> 
                     <button class="btn btn-primary " onclick="submitData()">REGISTER</button>
