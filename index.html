@@ -15,15 +15,21 @@
         <script src="js/main.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
-    <body>
-        <header>
+    <body >
+
+        
+        <div class="overlay">
+                <div id="loader"></div>
+        </div>
+
+        <header class="loading-state">
                 <div class="container logo_div">
                    <span class="text-uppercase logo_name">Blood bank</span>
                    <img class="img-reponsive logo" src="img/blood-donation.png">
                 </div>
         </header>
 
-         <section id="main_content" class="main_content">
+         <section id="main_content" class="main_content loading-state ">
              <div class="container">
                  <div class="row">
                      <div class="col-sm-8 content_details">
@@ -130,11 +136,11 @@
              </div><!--container-->
          </section><!--main-content-->
        
-         <footer class="footer">
+         <footer class="footer loading-state" >
              <p class="text-center">All Rights Reserved &copy; 2019</p>
          </footer>
       
-         <div id="myModal" class="modal">
+         <!-- <div id="myModal" class="modal">
             <div class="modal-contents"> 
                 <div class="modal-header"> 
                     
@@ -145,7 +151,7 @@
 
             </div>
 
-         </div>
+         </div> -->
       
         
     </body>
