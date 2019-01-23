@@ -518,9 +518,57 @@ console.log(numRefer);
 
 
 } 
-// function regDonor(){
-//     location.assign("donor_reg_form.html");
-// }
+function checkref(){
+    var selection=localStorage.getItem("User_ref_selection");
+    if(selection=="Yes"){
+        document.getElementById('user_ref').innerHTML="Referred";
+    }
+    else{
+        document.getElementById('user_ref').innerHTML="Not Referred";
+    }
+}
+
+ function regDonor(){
+    
+     database.ref('Records/'+user.uid).once('value',function(snapshot) {
+        if(snapshot.exists()){
+            
+            swal({
+                title: "You are already registered!",
+                text: "Do you want to refer another person!",
+                icon: "error",
+                buttons: ["No","Yes"],
+              })
+              .then((res)=> {
+                if(res){
+                    //alert('sahi');
+                    localStorage.setItem("User_ref_selection", "Yes");
+                    location.assign("donor_reg_form.html");
+                }
+                else{
+                    //alert('ghalat');
+
+                }
+              })
+              
+
+
+
+
+        }
+        else{
+            localStorage.setItem("User_ref_selection", "No");
+            location.assign("donor_reg_form.html");
+        }
+        
+      })
+
+
+
+
+
+     //location.assign("donor_reg_form.html");
+ }
 var firebaseRef=firebase.database().ref();
 //retrieve();
 // var counts;
