@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
+                
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -15,12 +16,25 @@
         <script src="js/main.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
-    <body>
+    <body onload="getdata()">
          <header>
              <div class="container ">
                 <div class="logo_div">
                         <span class="text-uppercase logo_name">Blood bank</span>
                         <img class="img-reponsive logo" src="img/blood-donation.png">
+                        <div class="text-right" style="display: inline;">
+                                <!--<button class="btn btn-info">Log out <i class="fas fa-sign-out-alt"></i></button>-->
+                               
+                                       
+                                        <form id="form_reg">
+                                                <input type="radio"  name="gender" id="yourself" value="Yourself" onclick="userregistered();"  checked > Yourself
+                                                <input type="radio" name="gender" id="others" value="Others" > Others from your reference
+                                               
+                                              </form>
+                                       
+                                
+        
+                        
                 </div>
 
              </div>
@@ -42,11 +56,11 @@
                             </div>
                             <div class="form-group">
                                     <label class="dateofb">Date of Birth</label>
-                                    <input type="date" class="form-control" id="dateofb"  required onblur=""> 
+                                    <input type="date" class="form-control" id="dateofb"   onblur="showage()"> 
                             </div>
                             <div class="form-group">
-                                    <label for="email_donor">Email Address</label>
-                                    <input type="email" class="form-control" placeholder="Enter email address" id="email_donor" required> 
+                                    <label for="email_donor" id="email_id">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="Enter email address" id="email_donor" required readonly> 
                             </div>
                             <div class="form-group">
                                     <label for="address">Full Address:</label>
@@ -54,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                     <label for="age">Age</label>
-                                    <input type="number" class="form-control" placeholder="" id="age"  > 
+                                    <input type="number" class="form-control" placeholder="" id="age"   readonly > 
                             </div>
                             <div class="form-group">
                                     <label for="phone_number">Phone number</label>
@@ -73,7 +87,10 @@
                                       <option>AB-</option>
                                     </select>
                              </div>
-                            
+                             <div class="form-group">
+                                <label for="reference">Reference</label>
+                                <input type="text" class="form-control" placeholder="" id="ref" required readonly > 
+                        </div>
                             
                     </form> 
                     <button class="btn btn-primary " onclick="submitData()">REGISTER</button>
@@ -88,11 +105,12 @@
                         
 
                 </form>
-                </div><!--main_form-->
+                </div>
+                <!--main_form-->
              </div><!--container-->
              
          </section>
-
+     
 
          <section>
              <p class="text-center">All Rights Reserved &copy; 2019</p>
@@ -101,5 +119,6 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     </body>
 </html>
