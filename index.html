@@ -15,11 +15,8 @@
         <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
         <script src="js/main.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
-    <body style=' background: url("img/background.jpg") no-repeat center center fixed;     width:100%;  background-size: cover;;opacity: 0.7;filter: alpha(opacity=30);text-align: center'>
+    <body>
 
         
         <div class="overlay">
@@ -29,7 +26,7 @@
         <header class="loading-state">
                 <div class="container logo_div">
                    <span class="text-uppercase logo_name">Blood bank</span>
-                   <img class="img-reponsive logo" src="img/blood-donation.png">
+                   <img class="img-reponsive logo" src="img/blood-donation.png" >
                 </div>
         </header>
 
@@ -37,7 +34,7 @@
              <div class="container">
                  <div class="row">
                      <div class="col-sm-8 content_details">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 90%;height:440px;" >
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -86,7 +83,8 @@
                           </div>
                          <h2>Saylani blood bank</h2>
                          <p class="text-justify col-sm-8 ">The recently established, state of the art Saylani Blood Bank and Thalassemia Centre is furnished with modern equipment, well trained technicians, leading Hematologists, Pediatricians, and General Physicians, and offers free of cost supply of blood and blood components to the poor and the needy. Free and effective screening, counseling and continuous medical care is provided to the deserving patients with Thalassemia and other haemoglobinopathies.</p>
-                     </div>
+                     </div><!--content_details-->
+
                      <div class="col-sm-4 forms">
                          <!--Modal: Login / Register Form-->
                             <!--Content-->
@@ -186,7 +184,7 @@
              </div><!--container-->
          </section><!--main-content-->
        
-         <footer class="footer loading-state" >
+         <footer class="donor_footer" >
             <p class="text-center"> &copy; 2019 All rights reserved | Developed by <a id="designer_name">Arsalan Fakhar Siddiqui</a></p>
          </footer>
       
