@@ -20,6 +20,10 @@
     </head>
 
     <body onload="retrieve()" >
+            <div class="overlay">
+                    <div id="loader"></div>
+            </div>
+
          <header>
              <div class="container ">
                 <div class="logo_div">
@@ -27,11 +31,11 @@
                         <img class="img-reponsive logo" src="img/blood-donation.png">
                 </div>
                 <div class="text-right" style="display: inline;">
-                        <!--<button class="btn btn-info">Log out <i class="fas fa-sign-out-alt"></i></button>-->
+                        
                         <div class="dropdown">
                                 <img id="user_image" src="img/user.png">
                                 
-                                <span id="display_username" >Userx</span>
+                                <span id="display_username" >Username</span>
                           
                                 <a href="Javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-caret-down"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -66,11 +70,13 @@
                                         </select>
                                  </div>
                     </div>
-                            
-                    
+                    <div class="text-left">
+                        <h1 class="text-uppercase text-capitalize">List of records</h1>
+                    </div>      
+
              </div>
          </section>
-         <div class="container">
+         <div class="container" style="min-height: 500px;">
          <table class="table table-hover table-responsive" style="width:100%; border:2px solid black" id="ex-table"  >
           
             
@@ -80,20 +86,8 @@
 
 
 
-
-
-
-         <section id="data_section" class="data_section">
-            <table class="table-responsive">
-
-            </table>
-
-
-
-         </section>
-
-         <footer class="footer">
-             <p class="text-center">All Rights Reserved &copy; 2019</p>
+         <footer class="donor_footer">
+            <p class="text-center"> &copy; 2019 All rights reserved | Developed by <a id="designer_name">Arsalan Fakhar Siddiqui</a></p>
          </footer>
          
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

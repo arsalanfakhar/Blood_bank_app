@@ -104,7 +104,7 @@ textarea {
     header{
         /*add*/
         background-color: rgba(179, 0, 0, 0.91);
-
+        height: 81.47px;
     }
     .logo{
         margin-top: 11px
@@ -131,7 +131,7 @@ textarea {
         min-width: 0px;
       }
 
-      footer{
+      .footer{
           position: fixed;
           bottom: 0;
           width: 100%;
@@ -159,12 +159,33 @@ textarea {
     #mid_section{
         padding-top: 28px;
     }
+    .dropdown{
+        color: black;
+        margin-bottom: 4px;
+    }
+    .fa-caret-down{
+        color: black;
+    }
     /*Main page-css end*/
     /*Donor_page_css*/
 
     .center_form{
         float: none;
              
+    }
+    #designer_name{
+        color: black;
+    }
+    .donor_footer{  
+        height: 34px;
+        padding-top: 2px;
+        margin-top: 5px;
+        background-color: rgba(179, 0, 0, 0.84);
+        border-top: 3px solid rgba(179, 0, 0, 1);
+        color: black;
+        font-weight: 700;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px; 
     }
     /*Donor_page_css_end
 

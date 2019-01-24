@@ -170,7 +170,7 @@ auth.onAuthStateChanged(firebaseUser=>{
     
     if(firebaseUser){
 
-        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html" && tellstatus==false){
+        if(location.href=="file:///F:/Blood%20bank%20site/index.html" && tellstatus==false){
             swal({
                 title: "Redirecting",
                 text: "Taking to new page",
@@ -188,13 +188,17 @@ auth.onAuthStateChanged(firebaseUser=>{
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
-         if(document.URL==("file:///D:/b%20bank/Blood_bank_app/main_page.html"))
+         if(document.URL==("file:///F:/Blood%20bank%20site/main_page.html"))
          {
             
              setDisplayName();
+             
          }
-         if(location.href=="file:///D:/b%20bank/Blood_bank_app/donor_reg_form.html"){
+         if(location.href=="file:///F:/Blood%20bank%20site/donor_reg_form.html"){
+
             setEmail();
+            
+
          }
 
 
@@ -203,7 +207,7 @@ auth.onAuthStateChanged(firebaseUser=>{
       
       
         console.log('not logged in');
-        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html"){
+        if(location.href=="file:///F:/Blood%20bank%20site/index.html"){
             //if response is earlier then also stop user
             setTimeout(function(){
                 document.getElementsByClassName('overlay')[0].style.display="none";
@@ -253,6 +257,38 @@ auth.onAuthStateChanged(firebaseUser=>{
 
 } */
 
+function resetpasslink() {
+    var email= document.getElementById('email_logpanel').value;
+    if(email!=""){
+        auth.sendPasswordResetEmail(email).then(function() {
+            // Email sent.
+            swal({
+                title: "Check your email",
+                text: "Follow the link on email to reset your password",
+                icon: "success",
+              })
+          }).catch(function(error) {
+            // An error happened.
+            swal({
+                title: "Error",
+                text: "Email not sent.Check your internet connection",
+                icon: "error",
+              })
+          });
+    }
+    else{
+        swal({
+            title: "Error",
+            text: "Enter email to reset password",
+            icon: "error",
+          })
+          
+    }
+}
+
+
+
+
 //Login_page_js_end
 
 //Main_page_js_start
@@ -268,10 +304,9 @@ function setDisplayName(){
     
     
     
-    
-     var temp=(user.email).split('@');
-     document.getElementById('display_username').innerHTML= '<span id="display_username" >'+temp[0]+'</span>';
-    
+    if(user.displayName!=null){
+        document.getElementById('display_username').innerText=user.displayName;
+    }
         
     
     
@@ -293,7 +328,7 @@ var setEmail= function(){
     
     var refvalue=document.getElementById('ref').value;
     
-    if(refvalue=="Not Referred"){
+    if(refvalue=="Register yourself"){
         //document.getElementById('email_donor').readOnly=true;
         //do work
         document.getElementById('email_donor').readOnly=true;
@@ -441,7 +476,7 @@ function submitData(){
     
     {
         var userid;
-        if(document.getElementById('ref').value=="Reffered"){
+        if(document.getElementById('ref').value=="Refer a person"){
             userid=user.email;
             var temp=userid.split(".");
             userid=temp[0];
@@ -479,7 +514,7 @@ function submitData(){
                 Age:age_donor,
                 Phone_Number:phone_donor,
                 Blood_Group:blood_grp,
-                Reference:"Self",
+                Reference:"Not referred",
     
         
             })
@@ -616,13 +651,13 @@ function checkref(){
     var selection=localStorage.getItem("User_ref_selection");
     
     if(selection=="Yes"){
-        document.getElementById('ref').options[0].innerText="Reffered";
+        document.getElementById('ref').options[0].innerText="Refer a person";
         document.getElementById('ref').readOnly=true;
     }
     else{
         //readonly true kar
         var ref=document.getElementById('ref');
-        var opt='<option>Reffered</option>';
+        var opt='<option>Refer a person</option>';
         ref.innerHTML+=opt;
         ref.readOnly=false;
     }
@@ -643,7 +678,7 @@ function checkref(){
                 if(res){
                     //alert('sahi');
                     localStorage.setItem("User_ref_selection", "Yes");
-                    location.assign("donor_reg_form.html");
+                    location.replace("donor_reg_form.html");
                 }
                 else{
                     //alert('ghalat');
@@ -660,7 +695,7 @@ function checkref(){
             //ask for himself or another person
 
             localStorage.setItem("User_ref_selection", "No");
-            location.assign("donor_reg_form.html");
+            location.replace("donor_reg_form.html");
         }
         
       })
@@ -954,8 +989,15 @@ else{
 });
 
 
-
+setTimeout(function(){
+    document.getElementsByClassName('overlay')[0].style.display="none";
+},3000);
 
 }
+
+function goBack(){
+    location.replace("main_page.html");
+}
+
 
 //Donor_page_js_end

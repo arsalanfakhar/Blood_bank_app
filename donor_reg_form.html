@@ -7,7 +7,6 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -91,7 +90,7 @@
                              <div class="form-group">
                                 <label for="reference">Reference</label>
                                 <select class="form-control" id="ref" onchange="setEmail()" required >
-                                  <option>Not Referred</option>
+                                  <option>Register yourself</option>
                                   
                                 </select>
                             </div>
@@ -100,9 +99,14 @@
                                 <input type="text" class="form-control" placeholder="" id="ref" required readonly > 
                              </div> -->
                             
-                    </form> 
-                    <button class="btn btn-primary " onclick="submitData()">REGISTER</button>
-                
+                    </form>
+                    <div class="text-center">
+                        <button class="btn btn-primary " onclick="submitData()">REGISTER</button>
+                        <button class="btn btn-primary " onclick="goBack()"><i class="fas fa-backward" style="margin-right: 4px;"></i>GO BACK</button>
+                    
+                    </div> 
+                    
+                    
                 </div><!--form_div-->
                  
                  
@@ -120,9 +124,9 @@
          </section>
      
 
-         <section>
-             <p class="text-center">All Rights Reserved &copy; 2019</p>
-         </section>
+         <footer class="donor_footer">
+             <p class="text-center"> &copy; 2019 All rights reserved | Developed by <a id="designer_name">Arsalan Fakhar Siddiqui</a></p>
+         </footer>
          
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="js/bootstrap.min.js"></script>
