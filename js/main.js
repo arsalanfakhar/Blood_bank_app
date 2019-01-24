@@ -170,7 +170,7 @@ auth.onAuthStateChanged(firebaseUser=>{
     
     if(firebaseUser){
 
-        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html" && tellstatus==false){
+        if(location.href=="file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/index.html" && tellstatus==false){
             swal({
                 title: "Redirecting",
                 text: "Taking to new page",
@@ -188,12 +188,12 @@ auth.onAuthStateChanged(firebaseUser=>{
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
-         if(document.URL==("file:///D:/b%20bank/Blood_bank_app/main_page.html"))
+         if(document.URL==("file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/main_page.html"))
          {
             
              setDisplayName();
          }
-         if(location.href=="file:///D:/b%20bank/Blood_bank_app/donor_reg_form.html"){
+         if(location.href=="file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/donor_reg_form.html"){
             setEmail();
          }
 
@@ -203,7 +203,7 @@ auth.onAuthStateChanged(firebaseUser=>{
       
       
         console.log('not logged in');
-        if(location.href=="file:///D:/b%20bank/Blood_bank_app/index.html"){
+        if(location.href=="file:///C:/Users/Owais/Desktop/bloodbank2/Blood_bank_app/index.html"){
             //if response is earlier then also stop user
             setTimeout(function(){
                 document.getElementsByClassName('overlay')[0].style.display="none";
@@ -797,139 +797,41 @@ function retrieve()
     snapshot.forEach(function(data){
         
         var val = data.val();
-      if(a=="Default" || a=="AB+"){
+        if(a=="Default"){
         
         
-        content +='<tr style="border:1px solid black">';
-        content+='<td style="border:1px solid black">'+t+'</td>';
-        content += '<td style="border:1px solid black">' + val.name + '</td>';
-        
-        content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-        content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-        content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-        content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-        content += '<td style="border:1px solid black">' + val.email+ '</td>';
-        content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-     
-        
-        content += '</tr>';
-        t++;}
-     else{
+            content +='<tr style="border:1px solid black">';
+            content+='<td style="border:1px solid black">'+t+'</td>';
+            content += '<td style="border:1px solid black">' + val.name + '</td>';
+            
+            content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
+            content += '<td style="border:1px solid black">' + val.Age+ '</td>';
+            content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
+            content += '<td style="border:1px solid black">' + val.Address+ '</td>';
+            content += '<td style="border:1px solid black">' + val.email+ '</td>';
+            content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
          
-          if(a=="A+"){
-              if(val.Blood_Group=="A+" ||val.Blood_Group=="A-"||val.Blood_Group=="O+"||val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
+            
+            content += '</tr>';
+            t++;}
+         else if(a==val.Blood_Group){
+             
+                  
+                    
+                    content +='<tr style="border:1px solid black">';
+                    content+='<td style="border:1px solid black">'+t+'</td>';
+                    content += '<td style="border:1px solid black">' + val.name + '</td>';
+                    
+                    content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
+                    content += '<td style="border:1px solid black">' + val.Age+ '</td>';
+                    content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
+                    content += '<td style="border:1px solid black">' + val.Address+ '</td>';
+                    content += '<td style="border:1px solid black">' + val.email+ '</td>';
+                    content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
+                    content += '</tr>';
+                    t++;
+    
           }
-          else if(a=="O+"){
-            if(val.Blood_Group=="O+"||val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-          else if(a=="B+"){
-            if(val.Blood_Group=="B+"||val.Blood_Group=="B-"||val.Blood_Group=="O+"||val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-          else if(a=="A-"){
-            if(val.Blood_Group=="A-"||val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-          else if(a=="O-"){
-            if(val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-          else if(a=="B-"){
-            if(val.Blood_Group=="O-"||val.Blood_Group=="B-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-          else { //AB-
-            if(val.Blood_Group=="AB-"||val.Blood_Group=="A-"||val.Blood_Group=="B-"||val.Blood_Group=="O-" ){
-                content +='<tr style="border:1px solid black">';
-                content+='<td style="border:1px solid black">'+t+'</td>';
-                content += '<td style="border:1px solid black">' + val.name + '</td>';
-                
-                content += '<td style="border:1px solid black">' + val.Blood_Group+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Age+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Phone_Number+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Address+ '</td>';
-                content += '<td style="border:1px solid black">' + val.email+ '</td>';
-                content += '<td style="border:1px solid black">' + val.Reference+ '</td>';
-                content += '</tr>';
-                t++;
-              }
-          }
-
-      }
      
     });
     //$('#ex-table').append(content);

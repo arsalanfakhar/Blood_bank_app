@@ -15,8 +15,11 @@
         <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
         <script src="js/main.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
-    <body >
+    <body style=' background: url("img/background.jpg") no-repeat center center fixed;     width:100%;  background-size: cover;;opacity: 0.7;filter: alpha(opacity=30);text-align: center'>
 
         
         <div class="overlay">
@@ -34,7 +37,53 @@
              <div class="container">
                  <div class="row">
                      <div class="col-sm-8 content_details">
-                         <img class="img-reponsive" src="img/saylani_blood.jpg" width="80%">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                              <li data-target="#myCarousel" data-slide-to="1"></li>
+                              <li data-target="#myCarousel" data-slide-to="2"></li>
+                              <li data-target="#myCarousel" data-slide-to="3"></li>
+                              <li data-target="#myCarousel" data-slide-to="4"></li>
+                              <li data-target="#myCarousel" data-slide-to="5"></li>
+                            </ol>
+                        
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                              <div class="item active">
+                                <img src="img/slider/blood-donation.jpg" alt="Los Angeles" style="width:100%; height:450px">
+                              </div>
+                              
+                              <div class="item">
+                                <img src="img/slider/blood-donation.png" alt="New york" style="width:100%; height:450px">
+                              </div>
+                              <div class="item">
+                                <img src="img/slider/download.png" alt="New york" style="width:100%; height:450px ">
+                              </div>
+                        
+                        
+                              <div class="item">
+                                <img src="img/slider/blod-donation.jpg" alt="Chicago" style="width:100%; height:450px">
+                              </div>
+                            
+                              <div class="item">
+                                <img src="img/slider/thelesemia.jpg" alt="New york" style="width:100%; height:450px">
+                              </div>
+                              <div class="item">
+                                <img src="img/slider/save_human.jpg" alt="New york" style="width:100%; height:450px">
+                              </div>
+                            </div>
+                        
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                              <span class="glyphicon glyphicon-chevron-left"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                              <span class="glyphicon glyphicon-chevron-right"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div>
                          <h2>Saylani blood bank</h2>
                          <p class="text-justify col-sm-8 ">The recently established, state of the art Saylani Blood Bank and Thalassemia Centre is furnished with modern equipment, well trained technicians, leading Hematologists, Pediatricians, and General Physicians, and offers free of cost supply of blood and blood components to the poor and the needy. Free and effective screening, counseling and continuous medical care is provided to the deserving patients with Thalassemia and other haemoglobinopathies.</p>
                      </div>
@@ -137,7 +186,7 @@
              </div><!--container-->
          </section><!--main-content-->
        
-         <footer class="footer loading-state" >
+         <footer class="footer loading-state"  style="position: relative;">
              <p class="text-center">All Rights Reserved &copy; 2019</p>
          </footer>
       
