@@ -56,9 +56,6 @@ textarea {
    Author's custom styles
    ========================================================================== */
     /*Index_page-css_start*/
-    .loading-state{
-        
-    }
     #loader {
         position: absolute;
         left: 50%;
@@ -95,12 +92,6 @@ textarea {
         opacity: 0.5;
         z-index: 2;
     }  
-
-
-
-
-
-
     header{
         /*add*/
         background-color: rgba(179, 0, 0, 0.91);
@@ -144,8 +135,6 @@ textarea {
           color: black;
           font-weight: 700;
           /*add end*/
-          /* background-color: rgba(151, 141, 154, 0.9);
-          border-top: 3px solid black; */
           border-top-right-radius: 20px;
           border-top-left-radius: 20px; 
       }
