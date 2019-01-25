@@ -81,7 +81,7 @@ function checkLoginStatus(){
             if (data) {
             //replace location here
             location.replace("main_page.html");
-            retrieve();
+            
           
           }
         }); 
@@ -144,7 +144,7 @@ function registerUser(){
             if (data) {
             //replace location here
               location.replace("main_page.html");
-              retrieve();
+              
             
           }
         }); 
@@ -176,7 +176,7 @@ auth.onAuthStateChanged(firebaseUser=>{
     
     if(firebaseUser){
 
-        if(location.href=="file:///F:/Blood%20bank%20site/index.html" && tellstatus==false){
+        if((location.pathname=="/" || location.pathname=="/index.html") && tellstatus==false){
             swal({
                 title: "Redirecting",
                 text: "Taking to new page",
@@ -194,16 +194,16 @@ auth.onAuthStateChanged(firebaseUser=>{
         console.log(firebaseUser.email);
         //Check for main_page
         //when hosting set it to location.pathname
-         if(document.URL==("file:///F:/Blood%20bank%20site/main_page.html"))
+         if(location.pathname=="/main_page.html")
          {
             
              setDisplayName();
              
          }
-         if(location.href=="file:///F:/Blood%20bank%20site/donor_reg_form.html"){
+         if(location.pathname=="/donor_reg_form.html"){
 
             setEmail();
-            
+            document.getElementsByClassName('overlay')[0].style.display="none";
 
          }
 
@@ -213,12 +213,34 @@ auth.onAuthStateChanged(firebaseUser=>{
       
       
         console.log('not logged in');
-        if(location.href=="file:///F:/Blood%20bank%20site/index.html"){
+        if(location.pathname=="/" || location.pathname=="/index.html"){
             //if response is earlier then also stop user
             setTimeout(function(){
                 document.getElementsByClassName('overlay')[0].style.display="none";
             },1000)
             
+        }
+        if(location.pathname=="/main_page.html"){
+            document.getElementsByClassName('overlay')[0].style.display="none";
+            swal({
+                title: "Redirecting",
+                text: "You must be logged in to continue",
+                icon: "error",
+            })
+            .then((value)=>{
+                location.replace("index.html");
+            })
+        }
+        if(location.pathname=="/donor_reg_form.html"){
+            document.getElementsByClassName('overlay')[0].style.display="none";
+            swal({
+                title: "Redirecting",
+                text: "You must be logged in to continue",
+                icon: "error",
+            })
+            .then((value)=>{
+                location.replace("index.html");
+            })
         }
     }
 
@@ -983,7 +1005,7 @@ function retrieve()
     document.getElementById("ex-table").innerHTML=s+content;
  else{
     //document.getElementById("ex-table").innerHTML=s+"<h1>No Record<h1>";
-    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="7">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</tr>';
+    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="8">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</tr>';
  }
     
      
@@ -991,7 +1013,7 @@ function retrieve()
 }
 else{
     s+='</tr>';
-    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="7">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</td>' +'</tr>';
+    document.getElementById("ex-table").innerHTML=s+'<tr>'+'<td colspan="8">'+'<h1 class="text-center">No Record<h1>'+ '</td>'+ '</td>' +'</tr>';
 }
 
 
@@ -1000,7 +1022,7 @@ else{
 
 setTimeout(function(){
     document.getElementsByClassName('overlay')[0].style.display="none";
-},3000);
+},2000);
 
 }
 
